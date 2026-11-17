@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="id" data-type="software" data-radius="soft" data-buttons="solid" data-motion="2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mongso · Ringkasan lapangan</title>
+  <meta name="description" content="Harga pasar SISKAPERBAPO, cuaca Open-Meteo, dan evaluasi rencana tanam untuk petani hortikultura Jawa Timur.">
+  <meta name="page-type" content="software">
+  <meta name="site-kind" content="software">
+  <meta name="theme-color" content="#163323">
+  <meta property="og:title" content="Mongso · Ringkasan lapangan">
+  <meta property="og:description" content="Harga pasar, cuaca, dan rencana tanam dalam satu tempat.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23163323'/%3E%3Cpath d='M16 24c0-6 3-10 8-12-2 6-4 9-8 12Z' fill='%23fff'/%3E%3Cpath d='M16 24c0-6-3-10-8-12 2 6 4 9 8 12Z' fill='%23bfd3b8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/mongso.css?v=leaf4">
+</head>
+<body data-page="dashboard">
+  <a class="skip-link" href="#main">Langsung ke konten</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Mongso, ke Ringkasan">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+        </span>
+        <span class="brand-name">Mongso</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav-overlay" aria-label="Buka menu navigasi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigasi utama">
+        <a class="nav-link" href="index.html" aria-current="page">Ringkasan</a>
+        <a class="nav-link" href="cuaca.html">Cuaca</a>
+        <a class="nav-link" href="pasar.html">Pasar</a>
+        <a class="nav-link" href="kalkulator.html">Kalkulator tanam</a>
+        <label class="regency-pick regency-pick--nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span class="sr-only">Kabupaten atau kota</span>
+          <select data-regency-select></select>
+        </label>
+      </nav>
+
+      <div class="header-actions">
+        <label class="regency-pick">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span class="sr-only">Kabupaten atau kota</span>
+          <select data-regency-select></select>
+        </label>
+
+        <div class="account" data-account data-account-state="signedout">
+          <div class="account-guest">
+            <button class="btn btn--ghost btn--sm account-register-btn" type="button" data-open-register>Daftar</button>
+            <button class="btn btn--sm account-login-btn" type="button">Masuk</button>
+          </div>
+          <button class="account-trigger" type="button" hidden aria-haspopup="true" aria-expanded="false" aria-controls="account-menu">
+            <span class="avatar" id="account-initials" aria-hidden="true"></span>
+            <span class="account-copy">
+              <strong id="account-name"></strong>
+              <span id="account-loc"></span>
+            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="account-menu" id="account-menu" hidden>
+            <div class="account-menu-head">
+              <strong id="account-menu-name"></strong>
+              <span id="account-menu-loc"></span>
+            </div>
+            <button class="menu-item menu-item--danger account-logout" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+              Keluar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="context-bar">
+    <div class="shell context-inner">
+      <nav class="breadcrumb" aria-label="Remah roti">
+        <a href="index.html">Mongso</a>
+        <span class="sep">/</span>
+        <span>Jawa Timur</span>
+        <span class="sep">/</span>
+        <span class="current">Ringkasan lapangan</span>
+      </nav>
+      <div class="context-meta">
+        <span class="data-chip">Data langsung</span>
+        <span data-context-date>-</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="hero hero--cadastral hero--leaf" aria-labelledby="hero-title">
+      <div class="shell">
+        <div class="hero-leaf-stage">
+          <!-- Ornamen tulang daun (midrib & veins) sebagai identitas struktural -->
+          <svg class="hero-leaf-veins" viewBox="0 0 1200 620" fill="none" aria-hidden="true" preserveAspectRatio="none">
+            <path d="M40 580 C 380 420, 740 220, 1160 40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 8" />
+            <path d="M360 430 C 410 310, 490 230, 620 180" stroke="currentColor" stroke-width="1" />
+            <path d="M580 315 C 680 340, 790 330, 910 280" stroke="currentColor" stroke-width="1" />
+            <path d="M760 215 C 800 140, 870 95, 970 70" stroke="currentColor" stroke-width="1" />
+          </svg>
+
+          <div class="hero-layout">
+            <!-- Kolom Kiri: Narasi & Dossier Lapangan Terpadu -->
+            <div class="hero-narrative">
+              <div class="hero-header-lockup">
+                <p class="hero-leaf-kicker">
+                  <span class="leaf-node" aria-hidden="true"></span>
+                  Ekosistem Agronomi Jawa Timur
+                </p>
+                <h1 id="hero-title" class="hero-title">Panen terukur di tanah Jawa Timur.</h1>
+                <p class="hero-lede">Satu meja kerja agronomis untuk membaca harga pasar resmi SISKAPERBAPO, memantau jendela cuaca Open-Meteo, dan mengunci modal tanam hortikultura sebelum lahan dibuka.</p>
+              </div>
+
+              <!-- Dossier Telemetri Lahan: Menggabungkan data cuaca & pasar ke dalam widget square-grounded dengan aksen daun -->
+              <div class="field-dossier" aria-label="Ringkasan kondisi lapangan terkini">
+                <div class="dossier-header">
+                  <span class="dossier-kicker">Telemetri Hari Ini</span>
+                  <span class="dossier-regency" id="hero-location">Kab. Malang · Jawa Timur</span>
+                </div>
+                
+                <div class="dossier-grid">
+                  <!-- Cuaca & Jendela Semprot -->
+                  <div class="dossier-item">
+                    <span class="dossier-label">Rekomendasi Kerja</span>
+                    <div class="dossier-value-group">
+                      <span class="dossier-icon" id="hero-weather-icon" aria-hidden="true">☀️</span>
+                      <div>
+                        <strong class="dossier-temp" id="hero-weather-temp">-</strong>
+                        <span class="dossier-cond" id="hero-weather-cond">memuat cuaca…</span>
+                      </div>
+                    </div>
+                    <div class="dossier-status-pill">
+                      <span class="badge" id="hero-weather-badge">Waktu kerja</span>
+                      <span class="dossier-note" id="hero-weather-note">Memuat saran lapangan…</span>
+                    </div>
+                  </div>
+
+                  <!-- Bursa Komoditas Acuan -->
+                  <div class="dossier-item dossier-item--border">
+                    <span class="dossier-label">Harga Acuan Teratas</span>
+                    <div class="dossier-price-group">
+                      <strong class="dossier-price" id="live-price">-</strong>
+                      <span class="dossier-delta" id="live-delta">-</span>
+                    </div>
+                    <span class="dossier-note" id="live-price-note">memuat komoditas…</span>
+                    <div class="dossier-submetrics">
+                      <span>Hujan 7 hr: <strong id="live-rain">-</strong> <small id="live-rain-note" class="sr-only">Open-Meteo</small></span>
+                      <span>Risiko: <strong id="live-risk">-</strong> <small id="live-risk-note" class="sr-only">-</small></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-actions-natural">
+                <a class="btn btn--pine" href="kalkulator.html">Hitung Rencana Tanam</a>
+                <a class="btn btn--outline-earth" href="pasar.html">Pantau Harga Komoditas</a>
+              </div>
+              <p class="hero-source-note">
+                Data resmi dari SISKAPERBAPO Disperindag &amp; Open-Meteo. Arsip lokal aktif saat jaringan offline.
+              </p>
+              <div id="dashboard-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <!-- Kolom Kanan: Kanvas Visual Berbentuk Daun (Leaf Silhouette + Square Cadastral Anchor) -->
+            <div class="hero-visual-pane">
+              <div class="cadastral-frame cadastral-frame--leaf">
+                <span class="leaf-stem-tag" aria-hidden="true">PETAK HORTIKULTURA · JATIM</span>
+                <figure class="cadastral-photo cadastral-photo--leaf">
+                  <img src="img/hero-field.jpg" alt="Petak lahan hortikultura Jawa Timur di kaki gunung" width="1200" height="896" fetchpriority="high" decoding="async">
+                  <svg class="leaf-photo-vein" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+                    <path d="M0 400 Q 180 220 400 0" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" />
+                    <path d="M110 290 Q 140 190 230 140" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+                    <path d="M190 210 Q 260 225 330 185" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+                  </svg>
+                  <div class="photo-dock-strip">
+                    <span class="dock-tag">Lahan Terdaftar Jawa Timur</span>
+                    <span class="dock-metric">Terpantau <strong id="stat-area">-</strong> <span id="stat-quota" class="sr-only">-</span></span>
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--bento section--showcase" aria-labelledby="tools-title">
+      <div class="shell">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="eyebrow">01 / Produk &amp; Perangkat Utama</p>
+            <h2 id="tools-title">Satu produk inti, didukung dua radar lapangan.</h2>
+            <p>Kalkulator Rencana Tanam menjadi pusat keputusan Anda, diperkuat pantauan cuaca harian dan bursa harga pasar di bawahnya.</p>
+          </div>
+          <p class="section-aside">Arsitektur fokus: kunci rencana tanam di atas, lalu verifikasi cuaca dan pasar pada kartu pendukung.</p>
+        </div>
+
+        <div class="bento-grid-tools showcase-stack">
+          <!-- MAIN PRODUCT SPOTLIGHT (Full-Width Flagship Stage ala Samsung) -->
+          <a class="bento-spotlight showcase-flagship" href="kalkulator.html">
+            <div class="flagship-copy">
+              <div class="bento-spotlight-head">
+                <span class="bento-spotlight-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:14px;height:14px"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/><path d="M8 16h.01"/><path d="M12 16h.01"/><path d="M16 16h.01"/></svg>
+                  Produk Utama · Flagship
+                </span>
+                <span class="mono">01 / Kalkulator Tanam</span>
+              </div>
+              <h3 class="flagship-title">Kalkulator Rencana Tanam &amp; Simulasi Panen.</h3>
+              <p class="flagship-desc">Mesin hitung utama Mongso untuk menguji kelayakan modal per hektar, membaca risiko oversupply komoditas di kabupaten tujuan, dan menentukan tanggal tanam paling aman sebelum bibit disemai.</p>
+
+              <div class="flagship-pillars">
+                <div class="flagship-pillar">
+                  <span class="pillar-num">01</span>
+                  <div>
+                    <strong>Kuota Serapan Wilayah</strong>
+                    <span>Cegah panen berbarengan saat pasokan pasar penuh</span>
+                  </div>
+                </div>
+                <div class="flagship-pillar">
+                  <span class="pillar-num">02</span>
+                  <div>
+                    <strong>Simulasi Modal &amp; Titik Impas</strong>
+                    <span>Estimasi biaya saprodi, tenaga kerja, dan margin bersih</span>
+                  </div>
+                </div>
+              </div>
+
+              <span class="btn btn--pine flagship-cta">
+                Buka Kalkulator Rencana Tanam
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </div>
+
+            <div class="bento-spotlight-preview flagship-stage-card">
+              <div class="flagship-stage-top">
+                <span class="mono">Simulasi Kuota Aktif</span>
+                <span class="flagship-leaf-pill">Prioritas Tanam</span>
+              </div>
+              <div class="tool-snippet flagship-snippet">
+                <strong id="tool-quota">-</strong>
+                <span>Kuota aman serapan pasar Jawa Timur saat ini</span>
+              </div>
+              <div class="flagship-spec-bar">
+                <div class="spec-cell">
+                  <span>Cakupan</span>
+                  <strong>11 Komoditas</strong>
+                </div>
+                <div class="spec-cell">
+                  <span>Basis Data</span>
+                  <strong>SISKAPERBAPO + BMKG/Open-Meteo</strong>
+                </div>
+                <div class="spec-cell">
+                  <span>Output</span>
+                  <strong>Skor Risiko &amp; ROI</strong>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- SUPPORTING PRODUCTS ROW (2 Produk Pendukung di Bawah Produk Utama) -->
+          <div class="bento-side-column showcase-supporting-row" aria-label="Produk pendukung keputusan">
+            <a class="bento-card-compact supporting-card" href="cuaca.html">
+              <div>
+                <div class="tool-card-head mb-8">
+                  <span class="supporting-tag">Produk Pendukung · Cuaca</span>
+                  <span class="mono">02 / Radar Iklim</span>
+                </div>
+                <h3>Cuaca &amp; Jendela Semprot Harian.</h3>
+                <p>Pantau prakiraan hujan 7 hari, kelembapan kanopi daun, dan waktu aman penyemprotan pestisida agar tidak tercuci air hujan.</p>
+              </div>
+              <div class="tool-snippet supporting-snippet mt-10">
+                <div class="mini-forecast" id="tool-weather"><span class="loading">Memuat…</span></div>
+                <span id="tool-weather-note">Open-Meteo · Jawa Timur</span>
+              </div>
+              <span class="link-arrow mt-8">Buka radar cuaca <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+            </a>
+
+            <a class="bento-card-compact supporting-card" href="pasar.html">
+              <div>
+                <div class="tool-card-head mb-8">
+                  <span class="supporting-tag">Produk Pendukung · Pasar</span>
+                  <span class="mono">03 / Bursa Harga</span>
+                </div>
+                <h3>Bursa Harga &amp; Radar Pasar Regional.</h3>
+                <p>Bandingkan pergerakan harga komoditas hortikultura antarkabupaten di Jawa Timur untuk memilih pasar jual dengan selisih terbaik.</p>
+              </div>
+              <div class="tool-snippet supporting-snippet mt-10">
+                <strong id="tool-market-price">-</strong>
+                <span id="tool-market-change">SISKAPERBAPO Jawa Timur</span>
+              </div>
+              <span class="link-arrow mt-8">Buka bursa pasar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--rule" aria-labelledby="news-title">
+      <div class="shell">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="eyebrow">02 / Warta tani</p>
+            <h2 id="news-title">Warta dan peringatan lapangan.</h2>
+            <p>Ringkasan kabar pertanian RSS resmi serta catatan lapangan dari data cuaca dan harga terkini.</p>
+          </div>
+        </div>
+
+        <div class="stack-14 news-stack">
+          <section class="panel" aria-label="Warta tani">
+            <div class="panel-head">
+              <div>
+                <h3>Warta terbaru</h3>
+                <p id="news-source-meta">Memuat sumber warta…</p>
+              </div>
+              <label class="filter-pill">
+                <span>Kategori:</span>
+                <select id="news-category-filter" aria-label="Filter kategori warta">
+                  <option value="">Semua kategori</option>
+                  <option value="Lapangan">Saran lapangan</option>
+                  <option value="Harga & Pasar">Harga &amp; Pasar</option>
+                  <option value="Cuaca & Iklim">Cuaca &amp; Iklim</option>
+                  <option value="Hama & Budidaya">Hama &amp; Budidaya</option>
+                  <option value="Kebijakan & Subsidi">Kebijakan &amp; Subsidi</option>
+                </select>
+              </label>
+            </div>
+            <div class="news-list" id="news-list">
+              <p class="panel-pad loading">Memuat warta…</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--rule">
+      <div class="shell feature-split">
+        <figure class="feature-photo">
+          <img src="img/seedling.jpg" alt="Bibit muda tumbuh di tanah yang baru diolah" width="1264" height="848" loading="lazy" decoding="async">
+        </figure>
+        <div class="feature-copy">
+          <p class="eyebrow">Untuk pertanian berkelanjutan</p>
+          <h2>Lebih baik untuk lahan Anda. Peduli pada masa depan.</h2>
+          <p>Mongso membantu petani hortikultura Jawa Timur merencanakan tanam dengan informasi yang jelas, memakai sarana produksi secara bijak, dan membangun kebun yang lebih tangguh.</p>
+          <ul class="check-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Jelas, tidak rumit</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Mengutamakan petani</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Asumsi transparan</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="shell cta-inner">
+        <div>
+          <h2>Informasi jelas, panen lebih terarah.</h2>
+          <p>Mulai dari cuaca, pahami sinyal pasar, lalu susun rencana tanam Anda.</p>
+        </div>
+        <a class="btn btn--lime" href="kalkulator.html">
+          Mulai rencana tanam
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+          </span>
+          Mongso · AgriPlan
+        </div>
+        <p class="footer-note">Harga dari SISKAPERBAPO Jawa Timur. Cuaca dari Open-Meteo. Data ditampilkan apa adanya, termasuk saat sumber sedang tidak tersedia.</p>
+      </div>
+      <nav class="footer-links" aria-label="Tautan footer">
+        <a href="index.html">Ringkasan</a>
+        <a href="cuaca.html">Cuaca</a>
+        <a href="pasar.html">Pasar</a>
+        <a href="kalkulator.html">Kalkulator tanam</a>
+        <a href="https://siskaperbapo.jatimprov.go.id/" target="_blank" rel="noopener noreferrer">SISKAPERBAPO</a>
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+      </nav>
+    </div>
+  </footer>
+
+  <dialog class="mobile-nav-overlay" id="mobile-nav-overlay" aria-modal="true" aria-label="Menu Navigasi Lapangan" aria-hidden="true">
+    <div class="mobile-nav-sheet">
+      <!-- Sheet Header -->
+      <div class="mobile-nav-head">
+        <a class="brand" href="index.html" aria-label="Mongso, ke Ringkasan">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+          </span>
+          <span class="brand-name">Mongso</span>
+        </a>
+        <button class="mobile-nav-close" type="button" id="mobile-nav-close" aria-label="Tutup menu navigasi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <span>Tutup</span>
+        </button>
+      </div>
+
+      <!-- Quick Regency Switcher in Mobile -->
+      <div class="mobile-nav-regency">
+        <label for="mobile-regency-select" class="mobile-regency-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>Pilih Kabupaten atau Kota</span>
+        </label>
+        <select id="mobile-regency-select" data-regency-select></select>
+      </div>
+
+      <!-- Navigation Destinations -->
+      <nav class="mobile-nav-links" aria-label="Daftar tautan utama">
+        <a class="mobile-nav-link" href="index.html" aria-current="page">
+          <span class="nav-num">01</span>
+          <span class="nav-title">Ringkasan Lapangan</span>
+        </a>
+        <a class="mobile-nav-link" href="cuaca.html">
+          <span class="nav-num">02</span>
+          <span class="nav-title">Cuaca &amp; Jendela Semprot</span>
+        </a>
+        <a class="mobile-nav-link" href="pasar.html">
+          <span class="nav-num">03</span>
+          <span class="nav-title">Bursa Pasar Komoditas</span>
+        </a>
+        <a class="mobile-nav-link" href="kalkulator.html">
+          <span class="nav-num">04</span>
+          <span class="nav-title">Kalkulator Rencana Tanam</span>
+        </a>
+      </nav>
+
+      <!-- Account & Actions Footer -->
+      <div class="mobile-nav-footer">
+        <button class="btn btn--outline-earth w-full" type="button" data-open-register>Daftar Akun Baru</button>
+        <button class="btn btn--pine w-full" type="button" data-open-login>Masuk ke Akun</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="login-dialog" id="account-login" aria-label="Akun Mongso">
+    <div class="auth-modal-top">
+      <div class="auth-modal-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+        </span>
+        <div>
+          <strong>Mongso · AgriPlan</strong>
+          <span>Portal Petani Jawa Timur</span>
+        </div>
+      </div>
+      <button class="auth-close-btn" type="button" data-auth-close aria-label="Tutup dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="auth-tabs" role="tablist" aria-label="Akun Mongso">
+      <button class="auth-tab" type="button" role="tab" id="tab-login" aria-controls="auth-panel-login" aria-selected="true" data-auth-tab="login">Masuk</button>
+      <button class="auth-tab" type="button" role="tab" id="tab-register" aria-controls="auth-panel-register" aria-selected="false" data-auth-tab="register">Daftar akun baru</button>
+    </div>
+
+    <section class="auth-panel" id="auth-panel-login" role="tabpanel" aria-labelledby="tab-login">
+      <form class="login-form" id="login-form">
+        <div class="login-head">
+          <p class="eyebrow">Sesi Akun</p>
+          <h2 id="login-title">Masuk ke akun Anda</h2>
+          <p>Akses titik koordinat lahan tersimpan dan riwayat rencana tanam Anda.</p>
+        </div>
+        <div class="form-error" id="login-error" role="alert" hidden></div>
+        <div class="field">
+          <label for="login-email">Alamat email</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="nama@contoh.com" required>
+        </div>
+        <div class="field">
+          <div class="field-head">
+            <label for="login-password">Kata sandi</label>
+            <button type="button" class="pw-toggle" data-toggle-pw="login-password" aria-pressed="false">Lihat</button>
+          </div>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" required>
+        </div>
+        <div class="login-actions">
+          <button class="btn btn--ghost" type="button" id="login-cancel">Batal</button>
+          <button class="btn" type="submit">Masuk ke akun</button>
+        </div>
+        <p class="auth-alt">Belum punya akun? <button type="button" data-auth-switch="register">Daftar sekarang</button></p>
+      </form>
+    </section>
+
+    <section class="auth-panel" id="auth-panel-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+      <form class="login-form register-form" id="register-form">
+        <div class="login-head">
+          <p class="eyebrow">Pendaftaran Gratis</p>
+          <h2 id="register-title">Buat akun Mongso</h2>
+          <p>Satu akun untuk memantau cuaca petak kebun dan menyimpan evaluasi tanam.</p>
+          <div class="auth-benefits">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 5 titik koordinat lahan</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Riwayat evaluasi &amp; kuota</span>
+          </div>
+        </div>
+        <div class="form-error" id="register-error" role="alert" hidden></div>
+        <div class="register-grid">
+          <div class="field">
+            <label for="register-name">Nama lengkap</label>
+            <input id="register-name" name="full_name" type="text" autocomplete="name" placeholder="Contoh: Pak Sugeng" required>
+          </div>
+          <div class="field">
+            <label for="register-email">Alamat email</label>
+            <input id="register-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="nama@contoh.com" required>
+          </div>
+          <div class="field">
+            <label for="register-role">Peran di lapangan</label>
+            <select id="register-role" name="role">
+              <option value="Petani Hortikultura">Petani hortikultura</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="register-regency">Kabupaten atau kota utama</label>
+            <select id="register-regency" name="regency" data-register-regency></select>
+          </div>
+          <div class="field">
+            <div class="field-head">
+              <label for="register-password">Kata sandi</label>
+              <button type="button" class="pw-toggle" data-toggle-pw="register-password" aria-pressed="false">Lihat</button>
+            </div>
+            <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="Minimal 8 karakter" required>
+          </div>
+          <div class="field">
+            <label for="register-confirm">Ulangi kata sandi</label>
+            <input id="register-confirm" name="confirm_password" type="password" autocomplete="new-password" minlength="8" placeholder="Ketik ulang sandi" required>
+          </div>
+        </div>
+        <p class="pw-hint" id="register-pw-hint">Gunakan minimal 8 karakter.</p>
+        <div class="login-actions">
+          <button class="btn btn--ghost" type="button" id="register-cancel">Batal</button>
+          <button class="btn" type="submit">Buat akun sekarang</button>
+        </div>
+        <p class="auth-alt">Sudah punya akun? <button type="button" data-auth-switch="login">Masuk di sini</button></p>
+      </form>
+    </section>
+  </dialog>
+
+  <script src="js/mongso.js" defer></script>
+</body>
+</html>
