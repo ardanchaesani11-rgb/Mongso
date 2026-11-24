@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="id" data-type="software" data-radius="soft" data-buttons="solid" data-motion="2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pasar · Mongso</title>
+  <meta name="description" content="Harga sebelas komoditas hortikultura dari SISKAPERBAPO Jawa Timur, perubahan mingguan, dan pasar tujuan dengan margin terbaik.">
+  <meta name="page-type" content="software">
+  <meta name="site-kind" content="software">
+  <meta name="theme-color" content="#163323">
+  <meta property="og:title" content="Pasar · Mongso">
+  <meta property="og:description" content="Harga komoditas dan pasar tujuan dengan margin terbaik.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23163323'/%3E%3Cpath d='M16 24c0-6 3-10 8-12-2 6-4 9-8 12Z' fill='%23fff'/%3E%3Cpath d='M16 24c0-6-3-10-8-12 2 6 4 9 8 12Z' fill='%23bfd3b8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/mongso.css?v=leaf7">
+</head>
+<body data-page="market">
+  <a class="skip-link" href="#main">Langsung ke konten</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="Mongso, ke Ringkasan">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+        </span>
+        <span class="brand-name">Mongso</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav-overlay" aria-label="Buka menu navigasi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigasi utama">
+        <a class="nav-link" href="index.html">Ringkasan</a>
+        <a class="nav-link" href="cuaca.html">Cuaca</a>
+        <a class="nav-link" href="pasar.html" aria-current="page">Pasar</a>
+        <a class="nav-link" href="kalkulator.html">Kalkulator tanam</a>
+        <label class="regency-pick regency-pick--nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span class="sr-only">Kabupaten atau kota</span>
+          <select data-regency-select></select>
+        </label>
+      </nav>
+
+      <div class="header-actions">
+        <label class="regency-pick">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span class="sr-only">Kabupaten atau kota</span>
+          <select data-regency-select></select>
+        </label>
+
+        <div class="account" data-account data-account-state="signedout">
+          <div class="account-guest">
+            <button class="btn btn--ghost btn--sm account-register-btn" type="button" data-open-register>Daftar</button>
+            <button class="btn btn--sm account-login-btn" type="button">Masuk</button>
+          </div>
+          <button class="account-trigger" type="button" hidden aria-haspopup="true" aria-expanded="false" aria-controls="account-menu">
+            <span class="avatar" id="account-initials" aria-hidden="true"></span>
+            <span class="account-copy">
+              <strong id="account-name"></strong>
+              <span id="account-loc"></span>
+            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="account-menu" id="account-menu" hidden>
+            <div class="account-menu-head">
+              <strong id="account-menu-name"></strong>
+              <span id="account-menu-loc"></span>
+            </div>
+            <button class="menu-item menu-item--danger account-logout" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+              Keluar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="context-bar">
+    <div class="shell context-inner">
+      <nav class="breadcrumb" aria-label="Remah roti">
+        <a href="index.html">Mongso</a>
+        <span class="sep">/</span>
+        <span>Jawa Timur</span>
+        <span class="sep">/</span>
+        <span class="current">Pasar</span>
+      </nav>
+      <div class="context-meta">
+        <span class="data-chip">Data langsung</span>
+        <span data-context-date>-</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="hero hero--cadastral hero--leaf" aria-labelledby="market-title">
+      <div class="shell">
+        <div class="hero-leaf-stage">
+          <svg class="hero-leaf-veins" viewBox="0 0 1200 620" fill="none" aria-hidden="true" preserveAspectRatio="none">
+            <path d="M40 580 C 380 420, 740 220, 1160 40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 8" />
+            <path d="M360 430 C 410 310, 490 230, 620 180" stroke="currentColor" stroke-width="1" />
+            <path d="M580 315 C 680 340, 790 330, 910 280" stroke="currentColor" stroke-width="1" />
+            <path d="M760 215 C 800 140, 870 95, 970 70" stroke="currentColor" stroke-width="1" />
+          </svg>
+
+          <div class="hero-layout">
+            <!-- Kolom Kiri: Tajuk Bursa Pasar & Filter Kabupaten -->
+            <div class="hero-narrative">
+              <div class="hero-header-lockup">
+                <p class="hero-leaf-kicker">
+                  <span class="leaf-node" aria-hidden="true"></span>
+                  Harga Pasar Resmi · SISKAPERBAPO Jawa Timur
+                </p>
+                <h1 id="market-title" class="hero-title">Cek harga jual hari ini sebelum melepas panen.</h1>
+                <p class="hero-lede">Pantau harga harian 11 tanaman di kabupaten Anda, lihat naik-turunnya minggu ini, dan cek pasar induk mana yang paling untung setelah dipotong ongkos kirim truk.</p>
+              </div>
+
+              <!-- Dossier Filter & Telemetri Pasar -->
+              <div class="field-dossier" aria-label="Filter dan ringkasan pasar">
+                <div class="dossier-header">
+                  <span class="dossier-kicker">Harga Pasar Wilayah</span>
+                  <span class="dossier-regency" id="market-regency">-</span>
+                </div>
+                <div class="filter-bar filter-bar--dossier">
+                  <div class="filter-group">
+                    <label class="filter-pill">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                      <span class="sr-only">Kabupaten atau kota</span>
+                      <select data-regency-select></select>
+                    </label>
+                    <span class="filter-static-note">Harga grosir · Rp / kg</span>
+                  </div>
+                  <div class="filter-meta">
+                    <span id="market-updated">memuat harga…</span>
+                    <span>·</span>
+                    <span>Hujan <strong id="market-rain">-</strong></span>
+                    <span>·</span>
+                    <span>Risiko <strong id="market-risk">-</strong></span>
+                  </div>
+                </div>
+                <div id="market-error" class="mt-8" role="status" aria-live="polite"></div>
+              </div>
+
+              <div class="hero-actions-natural">
+                <a class="btn btn--pine" href="kalkulator.html">
+                  Hitung Rencana Tanam
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </a>
+                <a class="btn btn--outline-earth" href="cuaca.html">Cek Radar Cuaca</a>
+              </div>
+            </div>
+
+            <!-- Kolom Kanan: Kanvas Makna Tren Berbentuk Daun -->
+            <div class="hero-visual-pane">
+              <div class="cadastral-frame cadastral-frame--leaf">
+                <span class="leaf-stem-tag" aria-hidden="true">SINYAL HARGA · SISKAPERBAPO</span>
+                <div class="leaf-telemetry-card">
+                  <svg class="leaf-photo-vein" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+                    <path d="M0 400 Q 180 220 400 0" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" />
+                    <path d="M110 290 Q 140 190 230 140" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                    <path d="M190 210 Q 260 225 330 185" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                  </svg>
+                  <div class="leaf-telemetry-head">
+                    <span class="flagship-leaf-pill">Makna di Balik Tren</span>
+                    <span class="mono" id="market-count">-</span>
+                  </div>
+                  <div class="leaf-telemetry-main">
+                    <h2 class="leaf-meaning-heading" id="trend-meaning-title">Harga bergerak, keputusan menunggu.</h2>
+                    <p class="leaf-meaning-copy" id="trend-meaning-text">Pilih komoditas untuk membaca pergerakan harga pekan ini.</p>
+                  </div>
+                  <div class="leaf-telemetry-metrics">
+                    <div class="leaf-metric-box">
+                      <span class="stat-label">Perubahan Pekan Ini</span>
+                      <strong class="stat-value" id="trend-week">-</strong>
+                    </div>
+                    <div class="leaf-metric-box">
+                      <span class="stat-label">Rentang 10 Hari</span>
+                      <strong class="stat-value" id="trend-range-2">-</strong>
+                    </div>
+                    <div class="leaf-metric-box">
+                      <span class="stat-label">Rata-Rata Jatim</span>
+                      <strong class="stat-value" id="trend-jatim">-</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--bento section--showcase" aria-labelledby="cards-title">
+      <div class="shell">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="eyebrow">01 / Spotlight Bursa Utama</p>
+            <h2 id="cards-title">Tren harga 10 hari &amp; komoditas acuan.</h2>
+            <p>Pilih komoditas di bawah untuk memantau grafik fluktuasi 10 hari terakhir beserta posisi harga di kabupaten Anda.</p>
+          </div>
+          <p class="section-aside">Spotlight utama menampilkan kurva harga harian, diikuti perbandingan tanaman dan radar pasar tujuan di bawahnya.</p>
+        </div>
+
+        <div class="showcase-stack">
+          <!-- MAIN SPOTLIGHT: Grafik Tren 10 Hari + Kartu Harga Acuan -->
+          <div class="showcase-flagship showcase-flagship--stack">
+            <div class="flagship-trend-grid">
+              <div class="flagship-wide-main">
+                <div class="bento-spotlight-head">
+                  <span class="bento-spotlight-badge">Spotlight Utama · Kurva 10 Hari</span>
+                  <span class="badge" id="trend-change">-</span>
+                </div>
+                <div class="trend-head trend-head--compact">
+                  <div>
+                    <h3 id="trend-title">Tren harga komoditas</h3>
+                    <p>Sepuluh hari terakhir · SISKAPERBAPO Jawa Timur</p>
+                  </div>
+                  <div class="trend-controls-inline">
+                    <label class="filter-pill trend-commodity-pick">
+                      Komoditas
+                      <select id="market-commodity" aria-label="Pilih komoditas"></select>
+                    </label>
+                    <div class="trend-price" id="trend-price">- <small>/kg</small></div>
+                  </div>
+                </div>
+                <div class="chart-wrap" id="trend-chart"></div>
+                <div class="trend-foot">
+                  <span id="trend-range">Rentang harga -</span>
+                  <span>Harga resmi, bukan proyeksi</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flagship-cards-divider">
+              <div class="bento-spotlight-head">
+                <span class="mono">Komoditas Strategis Kabupaten Terpilih (Klik untuk ganti grafik)</span>
+              </div>
+              <div class="price-grid" id="price-cards">
+                <p class="loading">Memuat harga pasar…</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUPPORTING MODULES ROW: Perbandingan Komoditas (Kiri) + Radar Margin Pasar Tujuan (Kanan) -->
+          <div class="showcase-supporting-row">
+            <div class="supporting-card supporting-card--panel">
+              <div>
+                <div class="tool-card-head mb-8">
+                  <span class="supporting-tag">Modul Pendukung · Komparasi</span>
+                  <span class="mono">02 / Perbandingan</span>
+                </div>
+                <h3 id="compare-title">Perbandingan harga per tanaman.</h3>
+                <p class="supporting-sub">Bandingkan harga, perubahan pekan ini, dan kurva tren dua komoditas sekaligus.</p>
+                <div class="filter-group mt-10">
+                  <label class="filter-pill">Tanaman A <select id="compare-a" aria-label="Komoditas A"></select></label>
+                  <label class="filter-pill">Tanaman B <select id="compare-b" aria-label="Komoditas B"></select></label>
+                </div>
+              </div>
+              <div class="chart-wrap" id="compare-chart"></div>
+              <div class="table-wrap mt-10">
+                <table class="table table--figma">
+                  <caption class="sr-only">Perbandingan harga per tanaman</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Komoditas</th>
+                      <th scope="col" class="num">Harga lokal</th>
+                      <th scope="col" class="num">Rata Jatim</th>
+                      <th scope="col" class="num">Pekan ini</th>
+                      <th scope="col" class="num">Tren 10 hari</th>
+                    </tr>
+                  </thead>
+                  <tbody id="compare-body">
+                    <tr><td colspan="5"><span class="loading">Memuat perbandingan…</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="supporting-card supporting-card--panel">
+              <div>
+                <div class="tool-card-head mb-8">
+                  <span class="supporting-tag">Modul Pendukung · Distribusi</span>
+                  <span class="mono">03 / Radar Pasar</span>
+                </div>
+                <h3 id="radar-title">Margin bersih ke pasar tujuan.</h3>
+                <p class="supporting-sub">Selisih harga tujuan sudah dikurangi biaya angkut truk. Angka negatif berarti menjual di pasar lokal lebih untung.</p>
+              </div>
+              <div class="radar-list mt-10" id="radar-list">
+                <p class="panel-pad loading">Memuat radar pasar…</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-note mt-14">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+          <span>Semua harga berasal dari SISKAPERBAPO Jawa Timur. Perubahan mingguan membandingkan harga hari ini dengan pekan sebelumnya. Angka pasar tidak memperhitungkan biaya produksi atau kualitas panen.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+          </span>
+          Mongso · AgriPlan
+        </div>
+        <p class="footer-note">Harga dari SISKAPERBAPO Jawa Timur. Cuaca dari Open-Meteo. Data ditampilkan apa adanya, termasuk saat sumber sedang tidak tersedia.</p>
+      </div>
+      <nav class="footer-links" aria-label="Tautan footer">
+        <a href="index.html">Ringkasan</a>
+        <a href="cuaca.html">Cuaca</a>
+        <a href="pasar.html">Pasar</a>
+        <a href="kalkulator.html">Kalkulator tanam</a>
+        <a href="https://siskaperbapo.jatimprov.go.id/" target="_blank" rel="noopener noreferrer">SISKAPERBAPO</a>
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+      </nav>
+    </div>
+  </footer>
+
+  <dialog class="mobile-nav-overlay" id="mobile-nav-overlay" aria-modal="true" aria-label="Menu Navigasi Lapangan" aria-hidden="true">
+    <div class="mobile-nav-sheet">
+      <!-- Sheet Header -->
+      <div class="mobile-nav-head">
+        <a class="brand" href="index.html" aria-label="Mongso, ke Ringkasan">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+          </span>
+          <span class="brand-name">Mongso</span>
+        </a>
+        <button class="mobile-nav-close" type="button" id="mobile-nav-close" aria-label="Tutup menu navigasi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <span>Tutup</span>
+        </button>
+      </div>
+
+      <!-- Quick Regency Switcher in Mobile -->
+      <div class="mobile-nav-regency">
+        <label for="mobile-regency-select" class="mobile-regency-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>Pilih Kabupaten atau Kota</span>
+        </label>
+        <select id="mobile-regency-select" data-regency-select></select>
+      </div>
+
+      <!-- Navigation Destinations -->
+      <nav class="mobile-nav-links" aria-label="Daftar tautan utama">
+        <a class="mobile-nav-link" href="index.html">
+          <span class="nav-num">01</span>
+          <span class="nav-title">Ringkasan Lapangan</span>
+        </a>
+        <a class="mobile-nav-link" href="cuaca.html">
+          <span class="nav-num">02</span>
+          <span class="nav-title">Cuaca &amp; Jendela Semprot</span>
+        </a>
+        <a class="mobile-nav-link" href="pasar.html" aria-current="page">
+          <span class="nav-num">03</span>
+          <span class="nav-title">Bursa Pasar Komoditas</span>
+        </a>
+        <a class="mobile-nav-link" href="kalkulator.html">
+          <span class="nav-num">04</span>
+          <span class="nav-title">Kalkulator Rencana Tanam</span>
+        </a>
+      </nav>
+
+      <!-- Account & Actions Footer -->
+      <div class="mobile-nav-footer">
+        <button class="btn btn--outline-earth w-full" type="button" data-open-register>Daftar Akun Baru</button>
+        <button class="btn btn--pine w-full" type="button" data-open-login>Masuk ke Akun</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="login-dialog" id="account-login" aria-label="Akun Mongso">
+    <div class="auth-modal-top">
+      <div class="auth-modal-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c0-6 3-10 8-12-2 7-4 10-8 12Z"/><path d="M12 21C12 15 9 11 4 9c2 7 4 10 8 12Z"/></svg>
+        </span>
+        <div>
+          <strong>Mongso · AgriPlan</strong>
+          <span>Portal Petani Jawa Timur</span>
+        </div>
+      </div>
+      <button class="auth-close-btn" type="button" data-auth-close aria-label="Tutup dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="auth-tabs" id="auth-tabs" role="tablist" aria-label="Akun Mongso">
+      <button class="auth-tab" type="button" role="tab" id="tab-login" aria-controls="auth-panel-login" aria-selected="true" data-auth-tab="login">Masuk</button>
+      <button class="auth-tab" type="button" role="tab" id="tab-register" aria-controls="auth-panel-register" aria-selected="false" data-auth-tab="register">Daftar akun baru</button>
+    </div>
+
+    <section class="auth-panel" id="auth-panel-login" role="tabpanel" aria-labelledby="tab-login">
+      <div class="login-form">
+        <div class="login-head">
+          <p class="eyebrow">Sesi Akun</p>
+          <h2 id="login-title">Masuk ke akun Anda</h2>
+          <p>Akses titik koordinat lahan tersimpan dan riwayat rencana tanam Anda.</p>
+        </div>
+
+        <div class="auth-google-wrap" data-google-auth hidden>
+          <div class="google-btn-slot" data-google-btn="login"></div>
+          <div class="auth-divider"><span>atau masuk dengan email</span></div>
+        </div>
+
+        <div class="auth-mode-switch" role="group" aria-label="Metode masuk">
+          <button class="auth-mode-btn" type="button" data-login-mode="password" aria-pressed="true">Kata sandi</button>
+          <button class="auth-mode-btn" type="button" data-login-mode="otp" aria-pressed="false">Kode email (OTP)</button>
+        </div>
+
+        <div class="form-error" id="login-error" role="alert" hidden></div>
+        <div class="form-info" id="login-info" role="status" hidden></div>
+
+        <form id="login-form">
+          <div class="field">
+            <label for="login-email">Alamat email</label>
+            <input id="login-email" name="email" type="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="nama@contoh.com" required>
+          </div>
+          <div class="field">
+            <div class="field-head">
+              <label for="login-password">Kata sandi</label>
+              <button type="button" class="pw-toggle" data-toggle-pw="login-password" aria-pressed="false">Lihat</button>
+            </div>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" required>
+          </div>
+          <div class="auth-inline-row">
+            <button type="button" class="auth-text-link" data-auth-switch="reset">Lupa kata sandi?</button>
+          </div>
+          <div class="login-actions">
+            <button class="btn btn--ghost" type="button" id="login-cancel">Batal</button>
+            <button class="btn" type="submit">Masuk ke akun</button>
+          </div>
+        </form>
+
+        <form id="login-otp-form" hidden>
+          <div class="field">
+            <label for="login-otp-email">Alamat email terdaftar</label>
+            <input id="login-otp-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="nama@contoh.com" required>
+          </div>
+          <div id="login-otp-step2" hidden>
+            <div class="field">
+              <div class="field-head">
+                <label for="login-otp-code">Kode verifikasi 6 digit</label>
+                <button type="button" class="pw-toggle" id="login-otp-resend">Kirim ulang</button>
+              </div>
+              <input id="login-otp-code" name="code" class="otp-input" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" placeholder="000000">
+            </div>
+          </div>
+          <div class="login-actions">
+            <button class="btn btn--ghost" type="button" data-auth-close>Batal</button>
+            <button class="btn" type="submit" id="login-otp-submit">Kirim kode 6 digit</button>
+          </div>
+        </form>
+
+        <p class="auth-alt">Belum punya akun? <button type="button" data-auth-switch="register">Daftar sekarang</button></p>
+      </div>
+    </section>
+
+    <section class="auth-panel" id="auth-panel-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+      <form class="login-form register-form" id="register-form">
+        <div class="login-head">
+          <p class="eyebrow">Pendaftaran Gratis</p>
+          <h2 id="register-title">Buat akun Mongso</h2>
+          <p>Verifikasi email dengan kode 6 digit untuk menjaga keamanan akun kebun Anda.</p>
+          <div class="auth-benefits">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 5 titik koordinat lahan</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Riwayat evaluasi &amp; kuota</span>
+          </div>
+        </div>
+
+        <div class="auth-google-wrap" data-google-auth hidden>
+          <div class="google-btn-slot" data-google-btn="register"></div>
+          <div class="auth-divider"><span>atau daftar dengan email</span></div>
+        </div>
+
+        <div class="form-error" id="register-error" role="alert" hidden></div>
+        <div class="register-grid">
+          <div class="field">
+            <label for="register-name">Nama lengkap</label>
+            <input id="register-name" name="full_name" type="text" autocomplete="name" placeholder="Contoh: Pak Sugeng" required>
+          </div>
+          <div class="field">
+            <label for="register-email">Alamat email</label>
+            <input id="register-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="nama@contoh.com" required>
+          </div>
+          <div class="field">
+            <label for="register-role">Peran di lapangan</label>
+            <select id="register-role" name="role">
+              <option value="Petani Hortikultura">Petani hortikultura</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="register-regency">Kabupaten atau kota utama</label>
+            <select id="register-regency" name="regency" data-register-regency></select>
+          </div>
+          <div class="field">
+            <div class="field-head">
+              <label for="register-password">Kata sandi</label>
+              <button type="button" class="pw-toggle" data-toggle-pw="register-password" aria-pressed="false">Lihat</button>
+            </div>
+            <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="Minimal 8 karakter" required>
+          </div>
+          <div class="field">
+            <label for="register-confirm">Ulangi kata sandi</label>
+            <input id="register-confirm" name="confirm_password" type="password" autocomplete="new-password" minlength="8" placeholder="Ketik ulang sandi" required>
+          </div>
+        </div>
+        <p class="pw-hint" id="register-pw-hint">Gunakan minimal 8 karakter.</p>
+        <div class="login-actions">
+          <button class="btn btn--ghost" type="button" id="register-cancel">Batal</button>
+          <button class="btn" type="submit">Kirim kode verifikasi</button>
+        </div>
+        <p class="auth-alt">Sudah punya akun? <button type="button" data-auth-switch="login">Masuk di sini</button></p>
+      </form>
+    </section>
+
+    <section class="auth-panel" id="auth-panel-verify" role="region" aria-labelledby="verify-title" hidden>
+      <form class="login-form" id="verify-form">
+        <div class="login-head">
+          <p class="eyebrow">Verifikasi Email</p>
+          <h2 id="verify-title">Masukkan kode 6 digit</h2>
+          <p>Kami telah mengirim kode verifikasi ke <strong id="verify-email-label">-</strong>. Berlaku 10 menit.</p>
+        </div>
+        <div class="form-error" id="verify-error" role="alert" hidden></div>
+        <div class="form-info" id="verify-info" role="status" hidden></div>
+        <div class="field">
+          <div class="field-head">
+            <label for="verify-code">Kode verifikasi</label>
+            <button type="button" class="pw-toggle" id="verify-resend-btn">Kirim ulang kode</button>
+          </div>
+          <input id="verify-code" name="code" class="otp-input" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" placeholder="000000" required>
+        </div>
+        <div class="login-actions">
+          <button class="btn btn--ghost" type="button" data-auth-switch="register">Ubah email</button>
+          <button class="btn" type="submit">Verifikasi &amp; Masuk</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="auth-panel" id="auth-panel-reset" role="region" aria-labelledby="reset-title" hidden>
+      <form class="login-form" id="reset-form">
+        <div class="login-head">
+          <p class="eyebrow">Atur Ulang Sandi</p>
+          <h2 id="reset-title">Lupa kata sandi?</h2>
+          <p>Masukkan alamat email terdaftar untuk menerima kode 6 digit pengaturan ulang kata sandi.</p>
+        </div>
+        <div class="form-error" id="reset-error" role="alert" hidden></div>
+        <div class="form-info" id="reset-info" role="status" hidden></div>
+        <div class="field">
+          <label for="reset-email">Alamat email</label>
+          <input id="reset-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="nama@contoh.com" required>
+        </div>
+        <div id="reset-step2" hidden>
+          <div class="field">
+            <div class="field-head">
+              <label for="reset-code">Kode verifikasi 6 digit</label>
+              <button type="button" class="pw-toggle" id="reset-resend-btn">Kirim ulang</button>
+            </div>
+            <input id="reset-code" name="code" class="otp-input" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" placeholder="000000">
+          </div>
+          <div class="field">
+            <div class="field-head">
+              <label for="reset-password">Kata sandi baru</label>
+              <button type="button" class="pw-toggle" data-toggle-pw="reset-password" aria-pressed="false">Lihat</button>
+            </div>
+            <input id="reset-password" name="new_password" type="password" autocomplete="new-password" minlength="8" placeholder="Minimal 8 karakter">
+          </div>
+        </div>
+        <div class="login-actions">
+          <button class="btn btn--ghost" type="button" data-auth-switch="login">Kembali</button>
+          <button class="btn" type="submit" id="reset-submit">Kirim kode reset</button>
+        </div>
+      </form>
+    </section>
+  </dialog>
+
+  <script src="js/mongso.js?v=leaf7" defer></script>
+</body>
+</html>
